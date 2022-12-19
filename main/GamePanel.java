@@ -17,10 +17,15 @@ public class GamePanel extends JPanel implements Runnable {
     // Create a game thread to run the game-loop
     private Thread gameThread;
 
+    // Add a key handler to the game
+    public KeyHandler keyH = new KeyHandler();
+
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Constants.BACKGROUND_COLOR);
         this.setDoubleBuffered(true);
+        this.addKeyListener(keyH);
+        this.setFocusable(true);
     }
 
     // Function to initialize the game-thread and to call the run method
