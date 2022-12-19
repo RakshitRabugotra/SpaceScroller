@@ -1,12 +1,17 @@
 package SpaceScroller.entity;
 
 import SpaceScroller.constants.Constants;
+
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class Enemy extends Entity {
     
     // Check if the Enemy is active
     public boolean isActive = false;
+
+    // Color of the enemy
+    private Color color = Color.RED;
 
     public Enemy(int posX, int posY) {
         // Call the superclass constructor
@@ -31,4 +36,9 @@ public class Enemy extends Entity {
         // We don't need to render the Enemy too
         return;
     }
+
+    /*
+     * Getters
+     */
+    public Color getColor() { return this.color; }
 }

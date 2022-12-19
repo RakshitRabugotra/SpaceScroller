@@ -5,12 +5,17 @@ package SpaceScroller.entity;
 
 import SpaceScroller.constants.Constants;
 import SpaceScroller.main.KeyHandler;
+
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class Player extends Entity {
 
     // Reference to the KeyHandler
     private KeyHandler keyH;
+
+    // Color of the player... (default)
+    private Color color = Color.GREEN;
 
     public Player(KeyHandler keyH, int posX, int posY) {
         // Call the superclass constructor 
@@ -47,4 +52,8 @@ public class Player extends Entity {
         return;
     }
 
+    /*
+     * Getters
+     */
+    public Color getColor() { return this.color; }
 }
