@@ -1,5 +1,7 @@
 package SpaceScroller.constants;
 
+import java.awt.Color;
+
 /*
  * The constants for the projects lie here!
  */
@@ -8,6 +10,13 @@ public class Constants {
 
     public static final String TITLE = "Space Shooter";
     public static final boolean RESIZABLE = false;
+
+    // The desired FPS we wanna run the game on!
+    public static final int FPS = 10;
+
+    // The background color fo the window
+    public static final Color BACKGROUND_COLOR = Color.BLACK;
+    
 
     /*
      * The Tile-size and Tile-map specifications
