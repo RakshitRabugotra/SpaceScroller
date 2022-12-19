@@ -18,6 +18,19 @@ public class Main {
         window.setTitle(Constants.TITLE);
         window.setResizable(Constants.RESIZABLE);
 
+        // Make a GamePanel
+        GamePanel gp = new GamePanel();
+
+        window.add(gp);
+        window.pack();
+
+        // Make the window visible
+        window.setVisible(true);
+        window.setFocusable(true);
+
+        // Run the game
+        gp.startGameThread();
+
     }
     
 }
