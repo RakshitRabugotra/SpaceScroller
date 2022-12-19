@@ -34,8 +34,8 @@ public class Player extends Entity {
         if(keyH.rightPressed) this.x++;
 
         // Clamp the position of the player
-        this.x = Math.min(Math.max(this.x, 0), Constants.SCREEN_WIDTH - this.width);
-        this.y = Math.min(Math.max(this.y, 0), Constants.SCREEN_HEIGHT - this.height);
+        this.x = Math.min(Math.max(this.x, 0), Constants.MAX_SCREEN_COLS - this.width);
+        this.y = Math.min(Math.max(this.y, 0), Constants.MAX_SCREEN_ROWS - this.height);
     }
 
     @Override
