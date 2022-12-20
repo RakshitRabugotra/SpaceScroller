@@ -12,7 +12,8 @@ public class KeyHandler implements KeyListener {
     private static int downKeyBinding = KeyEvent.VK_S;
 
     // To keep track of which side we're moving
-    public boolean upPressed, downPressed, leftPressed, rightPressed;
+    public boolean upPressed = false, downPressed = false, 
+    leftPressed = false, rightPressed = false;
 
     @Override
     public void keyTyped(KeyEvent e) {
