@@ -4,7 +4,6 @@ import SpaceScroller.constants.Constants;
 import SpaceScroller.main.GamePanel;
 import SpaceScroller.main.KeyHandler;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;;
 
@@ -41,8 +40,8 @@ public class TileMap extends Entity {
     }
 
     // To set the player reference
-    public void setPlayer(Player p) {
-        this.player = p;
+    public void setPlayer(int posX, int posY) {
+        this.player = new Player(this.keyH, posX, posY);
     }
 
     // To add an enemy
@@ -61,6 +60,8 @@ public class TileMap extends Entity {
 
         // Update the player
         player.update(dt);
+
+        // System.out.println("PLAYER X/Y: " + player.x + ", " + player.y);
     }
 
     @Override
@@ -73,7 +74,7 @@ public class TileMap extends Entity {
                 // If the position is same as player, then render a green rectangle
                 if(col == player.x && row == player.y) {
                     g2.setColor(player.getColor());
-                    g2.drawRect(player.x, player.y, player.width, player.height);
+                    g2.drawRect(player.x * player.width, player.y * player.height, player.width, player.height);
                     continue;
                 }
 
@@ -81,7 +82,7 @@ public class TileMap extends Entity {
                 for(Enemy e : currentActiveEnemies) {
                     if(col == e.x && row == e.y) {
                         g2.setColor(e.getColor());
-                        g2.drawRect(e.y, e.x, e.width, e.height);
+                        g2.drawRect(e.x * e.width, e.y * e.height, e.width, e.height);
                     } 
                 }
 
