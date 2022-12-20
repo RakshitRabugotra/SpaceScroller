@@ -1,5 +1,6 @@
 package SpaceScroller.entity;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 import SpaceScroller.constants.Constants;
@@ -9,7 +10,11 @@ public class Bullet extends Entity {
     // The direction in which the bullet will move
     public String direction = "N";
 
+    // The valid directions for the bullet
     private String[] validDirections = new String[] {"N", "E", "S", "W", "NW", "NE", "SE", "SW", "NESW"};
+
+    // A color for the bullet
+    private Color color = Color.ORANGE;
 
     public Bullet(int posX, int posY, String direction) throws IllegalArgumentException {
         // Call the superclass constructor
@@ -80,4 +85,9 @@ public class Bullet extends Entity {
         // A simple collision of positions is valid here!
         return (this.x == e.x && this.y == e.y);
     }
+
+    /*
+     * Getters
+     */
+    public Color getColor() { return this.color; }
 }
