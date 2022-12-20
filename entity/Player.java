@@ -32,15 +32,18 @@ public class Player extends Entity {
          */
 
         // Move the player around the screen
-        if(keyH.upPressed) this.y--;
+        if(keyH.upPressed) {
+            System.out.println("True");
+            this.y--;
+        }
         if(keyH.downPressed) this.y++;
 
         if(keyH.leftPressed) this.x--;
         if(keyH.rightPressed) this.x++;
 
         // Clamp the position of the player
-        this.x = Math.min(Math.max(this.x, 0), Constants.MAX_SCREEN_COLS - this.width);
-        this.y = Math.min(Math.max(this.y, 0), Constants.MAX_SCREEN_ROWS - this.height);
+        this.x = Math.min(Math.max(this.x, 0), Constants.MAX_SCREEN_COLS - 1); // -1 for the width and height
+        this.y = Math.min(Math.max(this.y, 0), Constants.MAX_SCREEN_ROWS - 1); // -1 for the width and height
     }
 
     @Override

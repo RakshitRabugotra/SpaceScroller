@@ -27,8 +27,8 @@ public class Enemy extends Entity {
          * We will move each enemy different way so,
          * don't do anything here, just clamp the positions
          */
-        this.x = Math.min(Math.max(this.x, 0), Constants.MAX_SCREEN_COLS - this.width);
-        this.y = Math.min(Math.max(this.y, 0), Constants.MAX_SCREEN_ROWS - this.height);
+        this.x = Math.min(Math.max(this.x, 0), Constants.MAX_SCREEN_COLS - 1); // -1 for width and height
+        this.y = Math.min(Math.max(this.y, 0), Constants.MAX_SCREEN_ROWS - 1); // -1 for width and height
     }
 
     @Override
