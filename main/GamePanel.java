@@ -7,6 +7,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import SpaceScroller.constants.Constants;
+import SpaceScroller.entity.Enemy;
+import SpaceScroller.entity.TileMap;
 
 public class GamePanel extends JPanel implements Runnable {
     
@@ -20,12 +22,21 @@ public class GamePanel extends JPanel implements Runnable {
     // Add a key handler to the game
     public KeyHandler keyH = new KeyHandler();
 
+    // Create a new TileMap
+    public TileMap tileMap = new TileMap(this, keyH);
+
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Constants.BACKGROUND_COLOR);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+
+        // Add a player and an enemy to the tileMap
+        tileMap.setPlayer(0, Constants.SCREEN_HEIGHT);
+
+        // Add an enemy to the screen
+        tileMap.addEnemy(new Enemy(0, 0));
     }
 
     // Function to initialize the game-thread and to call the run method
@@ -42,6 +53,7 @@ public class GamePanel extends JPanel implements Runnable {
         /*
          * Update all the game entities here!
          */
+        tileMap.update(dt);
     }
 
     public void paintComponent(Graphics g) {
@@ -56,6 +68,7 @@ public class GamePanel extends JPanel implements Runnable {
         /*
          * Draw all the game entities here!
          */
+        tileMap.draw(g2);
         
 
         // Dispose the graphics for better memory management
