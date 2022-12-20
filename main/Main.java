@@ -26,7 +26,7 @@ public class Main {
 
         // Make the window visible
         window.setVisible(true);
-        window.setFocusable(true);
+        
         window.setLocationRelativeTo(null);
 
         // Run the game
