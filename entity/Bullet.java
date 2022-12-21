@@ -22,6 +22,9 @@ public class Bullet extends Entity {
 
         // Else we will copy the direction
         this.direction = direction;
+
+        // The HP will always be 1
+        this.healthPoints = 1;
     }
     
     @Override
@@ -70,9 +73,6 @@ public class Bullet extends Entity {
 
 
         }
-        
-        // If we're out of the scene, then destroy the object
-        this.isActive = false;
     }
 
     @Override
@@ -80,21 +80,10 @@ public class Bullet extends Entity {
         // Draw method will be handled by the TileMap
     }
 
-    public boolean isColliding(Entity e) {
-        // A simple collision of positions is valid here!
-        return (this.x == e.x && this.y == e.y);
-    }
-
-    public boolean isOutOfBounds(int lowerBoundX, int upperBoundX, int lowerBoundY, int upperBoundY) {
-        // return true if the bullet is either out of bounds from the X or Y
-        boolean isInBoundX = (lowerBoundX <= this.x && this.x < upperBoundX);
-        boolean isInBoundY = (lowerBoundY <= this.y && this.y < upperBoundY);
-
-        return !(isInBoundX && isInBoundY);
-    }
-
     /*
-     * Getters
+     * Setters
      */
-    public Color getColor() { return this.color; }
+    @Override
+    public void setHealthPoints(int hp) { /* Cannot change the HP of bullet */ this.healthPoints = 1;}
+
 }
