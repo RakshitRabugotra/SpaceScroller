@@ -17,6 +17,9 @@ public class Player extends Entity {
     // Color of the player... (default)
     protected Color color = Color.GREEN;
 
+    // The type of bullet that we will store
+    private int bulletSpawnType = 0;
+
     public Player(KeyHandler keyH, int posX, int posY) {
         // Call the superclass constructor 
         super(posX, posY, Constants.SCALED_TILESIZE, Constants.SCALED_TILESIZE);
@@ -38,6 +41,12 @@ public class Player extends Entity {
         if(keyH.leftPressed) this.x--;
         if(keyH.rightPressed) this.x++;
 
+        // To change the bullet type
+        if(keyH.switchBulletPressed) {
+            this.bulletSpawnType++;
+            if(this.bulletSpawnType == Constants.VALID_DIRECTIONS.length) this.bulletSpawnType = 0;
+        }
+
         // Clamp the position of the player
         this.x = Math.min(Math.max(this.x, 0), Constants.MAX_SCREEN_COLS - 1); // -1 for the width and height
         this.y = Math.min(Math.max(this.y, 0), Constants.MAX_SCREEN_ROWS - 1); // -1 for the width and height
@@ -53,8 +62,21 @@ public class Player extends Entity {
     }
 
     /*
+     * Setters
+     */
+    // To change the spawn bullet type of the player
+    public void setBulletSpawnType(int directionIndex) {
+        // Check if the direction given is valid
+        if(0 <= directionIndex && directionIndex < Constants.VALID_DIRECTIONS.length) {
+            this.bulletSpawnType = directionIndex;
+        }
+    }
+
+    /*
      * Getters
      */
     @Override
     public Color getColor() { return this.color; }
+
+    public int getBulletSpawnType() { return this.bulletSpawnType; }
 }

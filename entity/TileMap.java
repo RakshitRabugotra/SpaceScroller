@@ -66,6 +66,7 @@ public class TileMap extends Entity {
 
         // Display the number of entities in the scene
         System.out.println("COUNT <ENTITIES>: " + currentActiveEntities.size());
+        System.out.println("BULLET INDEX/DIRECTION: " + player.getBulletSpawnType() + " / " + Constants.VALID_DIRECTIONS[player.getBulletSpawnType()]);
 
         // Update the player
         player.update(dt);
@@ -73,7 +74,7 @@ public class TileMap extends Entity {
         // If the user wants to shoot, then shoot a bullet
         if(keyH.shootPressed) {
             // Instantiate a new bullet and give it upwards direction
-            currentActiveEntities.add(new Bullet(player.x, player.y-1, "N"));
+            currentActiveEntities.add(new Bullet(player.x, player.y, Constants.VALID_DIRECTIONS[player.getBulletSpawnType()]));
         }
     }
 
