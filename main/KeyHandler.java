@@ -10,10 +10,11 @@ public class KeyHandler implements KeyListener {
     private static int rightKeyBinding = KeyEvent.VK_D;
     private static int upKeyBinding = KeyEvent.VK_W;
     private static int downKeyBinding = KeyEvent.VK_S;
+    private static int shootKeyBinding = KeyEvent.VK_SPACE;
 
     // To keep track of which side we're moving
-    public boolean upPressed = false, downPressed = false, 
-    leftPressed = false, rightPressed = false;
+    public boolean upPressed = false, downPressed = false, leftPressed = false, rightPressed = false;
+    public boolean shootPressed = false;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -32,6 +33,9 @@ public class KeyHandler implements KeyListener {
         if(code == rightKeyBinding) rightPressed = true;
         if(code == upKeyBinding) upPressed = true;
         if(code == downKeyBinding) downPressed = true;
+
+        // To shoot a bullet
+        if(code == shootKeyBinding) shootPressed = true;
         
     }
 
@@ -46,6 +50,7 @@ public class KeyHandler implements KeyListener {
         if(code == upKeyBinding) upPressed = false;
         if(code == downKeyBinding) downPressed = false;
         
+        if(code == shootKeyBinding) shootPressed = false;
     }
     
 }
