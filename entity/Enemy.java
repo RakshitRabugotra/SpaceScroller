@@ -6,19 +6,12 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class Enemy extends Entity {
-    
-    // Check if the Enemy is active
-    public boolean isActive = false;
-
     // Color of the enemy
-    private Color color = Color.RED;
+    protected Color color = Color.RED;
 
     public Enemy(int posX, int posY) {
         // Call the superclass constructor
         super(posX, posY, Constants.SCALED_TILESIZE, Constants.SCALED_TILESIZE);
-
-        // Set the active status
-        this.isActive = true;
     }
 
     @Override
@@ -40,5 +33,6 @@ public class Enemy extends Entity {
     /*
      * Getters
      */
+    @Override
     public Color getColor() { return this.color; }
 }
