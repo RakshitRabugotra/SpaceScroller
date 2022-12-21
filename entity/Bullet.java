@@ -11,7 +11,7 @@ public class Bullet extends Entity {
     public String direction = "N";
 
     // The valid directions for the bullet
-    private String[] validDirections = new String[] {"N", "E", "S", "W", "NW", "NE", "SE", "SW", "NESW"};
+    private final String[] validDirections = new String[] {"N", "E", "S", "W", "NW", "NE", "SE", "SW", "NESW"};
 
     // A color for the bullet
     private Color color = Color.ORANGE;
@@ -19,12 +19,6 @@ public class Bullet extends Entity {
     public Bullet(int posX, int posY, String direction) throws IllegalArgumentException {
         // Call the superclass constructor
         super(posX, posY, Constants.SCALED_TILESIZE, Constants.SCALED_TILESIZE);
-        
-        // Validate the direction
-        // Valid directions are these
-        for(String validDirection: validDirections) {
-            if(validDirection.compareTo(direction) != 0) throw new IllegalArgumentException("Parameter 'direction' is not valid: " + direction);
-        }
 
         // Else we will copy the direction
         this.direction = direction;
@@ -73,7 +67,12 @@ public class Bullet extends Entity {
             default:
                 System.out.println("Illegal value for direction: " + direction);
                 break;
+
+
         }
+        
+        // If we're out of the scene, then destroy the object
+        this.isActive = false;
     }
 
     @Override
@@ -84,6 +83,14 @@ public class Bullet extends Entity {
     public boolean isColliding(Entity e) {
         // A simple collision of positions is valid here!
         return (this.x == e.x && this.y == e.y);
+    }
+
+    public boolean isOutOfBounds(int lowerBoundX, int upperBoundX, int lowerBoundY, int upperBoundY) {
+        // return true if the bullet is either out of bounds from the X or Y
+        boolean isInBoundX = (lowerBoundX <= this.x && this.x < upperBoundX);
+        boolean isInBoundY = (lowerBoundY <= this.y && this.y < upperBoundY);
+
+        return !(isInBoundX && isInBoundY);
     }
 
     /*
