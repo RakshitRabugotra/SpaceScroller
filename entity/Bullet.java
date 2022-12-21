@@ -10,11 +10,8 @@ public class Bullet extends Entity {
     // The direction in which the bullet will move
     public String direction = "N";
 
-    // The valid directions for the bullet
-    private final String[] validDirections = new String[] {"N", "E", "S", "W", "NW", "NE", "SE", "SW", "NESW"};
-
     // A color for the bullet
-    private final Color defaultColor = Color.ORANGE;
+    private Color color = Color.ORANGE;
 
     public Bullet(int posX, int posY, String direction) throws IllegalArgumentException {
         // Call the superclass constructor
@@ -25,9 +22,6 @@ public class Bullet extends Entity {
 
         // The HP will always be 1
         this.healthPoints = 1;
-
-        // The default color
-        this.color = defaultColor;
     }
     
     @Override
@@ -70,11 +64,12 @@ public class Bullet extends Entity {
                 this.x--;
                 break;
 
+            case "NEWS":
+                break;
+
             default:
                 System.out.println("Illegal value for direction: " + direction);
                 break;
-
-
         }
     }
 
@@ -82,6 +77,20 @@ public class Bullet extends Entity {
     public void draw(Graphics2D g2) {
         // Draw method will be handled by the TileMap
     }
+
+    // To validate the direction of the Bullet
+    public static boolean isValidDirection(String bulletDirection) {
+        // Validate using the Constants array
+        for(String dir: Constants.VALID_DIRECTIONS) { if(!dir.equals(bulletDirection)) { return false; }}
+        // The direction is valid
+        return true;
+    }
+
+    /*
+     * Getters
+     */
+    @Override
+    public Color getColor() { return this.color; }
 
     /*
      * Setters
