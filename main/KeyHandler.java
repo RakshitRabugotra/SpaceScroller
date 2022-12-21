@@ -11,10 +11,11 @@ public class KeyHandler implements KeyListener {
     private static int upKeyBinding = KeyEvent.VK_W;
     private static int downKeyBinding = KeyEvent.VK_S;
     private static int shootKeyBinding = KeyEvent.VK_SPACE;
+    private static int switchBulletBinding = KeyEvent.VK_P;
 
     // To keep track of which side we're moving
     public boolean upPressed = false, downPressed = false, leftPressed = false, rightPressed = false;
-    public boolean shootPressed = false;
+    public boolean shootPressed = false, switchBulletPressed = false;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -36,6 +37,8 @@ public class KeyHandler implements KeyListener {
 
         // To shoot a bullet
         if(code == shootKeyBinding) shootPressed = true;
+        // To change the bullet type
+        if(code == switchBulletBinding) switchBulletPressed = true;
         
     }
 
@@ -51,6 +54,7 @@ public class KeyHandler implements KeyListener {
         if(code == downKeyBinding) downPressed = false;
         
         if(code == shootKeyBinding) shootPressed = false;
+        if(code == switchBulletBinding) switchBulletPressed = false;
     }
     
 }
