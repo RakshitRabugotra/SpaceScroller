@@ -15,7 +15,7 @@ public class Player extends Entity {
     private KeyHandler keyH;
 
     // Color of the player... (default)
-    private Color color = Color.GREEN;
+    protected Color color = Color.GREEN;
 
     public Player(KeyHandler keyH, int posX, int posY) {
         // Call the superclass constructor 
@@ -32,10 +32,7 @@ public class Player extends Entity {
          */
 
         // Move the player around the screen
-        if(keyH.upPressed) {
-            System.out.println("True");
-            this.y--;
-        }
+        if(keyH.upPressed) this.y--;
         if(keyH.downPressed) this.y++;
 
         if(keyH.leftPressed) this.x--;
@@ -58,5 +55,6 @@ public class Player extends Entity {
     /*
      * Getters
      */
+    @Override
     public Color getColor() { return this.color; }
 }
