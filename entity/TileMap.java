@@ -10,7 +10,7 @@ import java.util.ArrayList;;
 public class TileMap extends Entity {
 
     // To store the current active Enemies
-    private ArrayList<Enemy> currentActiveEnemies = new ArrayList<>();
+    private ArrayList<Entity> currentActiveEntities = new ArrayList<>();
 
     // To store the Player
     private Player player;
@@ -46,7 +46,7 @@ public class TileMap extends Entity {
 
     // To add an enemy
     public void addEnemy(Enemy e) {
-        currentActiveEnemies.add(e);
+        currentActiveEntities.add(e);
     }
 
     @Override
@@ -55,13 +55,20 @@ public class TileMap extends Entity {
          * Update the positions of the Player and enemies here!
          */
 
+        // Remove all the inactive entities
+        currentActiveEntities = removeInactiveEntities(currentActiveEntities);
+
         // Update all the enemies that are active
-        for(Enemy e: currentActiveEnemies) e.update(dt);
+        for(Entity e: currentActiveEntities) e.update(dt);
 
         // Update the player
         player.update(dt);
 
-        // System.out.println("PLAYER X/Y: " + player.x + ", " + player.y);
+        // If the user wants to shoot, then shoot a bullet
+        if(keyH.shootPressed) {
+            // Instantiate a new bullet and give it upwards direction
+            currentActiveEntities.add(new Bullet(player.x, player.y-1, "N"));
+        }
     }
 
     @Override
@@ -79,7 +86,7 @@ public class TileMap extends Entity {
                 }
 
                 // If the position is same as any enemy, then render the enemy
-                for(Enemy e : currentActiveEnemies) {
+                for(Entity e : currentActiveEntities) {
                     if(col == e.x && row == e.y) {
                         g2.setColor(e.getColor());
                         g2.drawRect(e.x * e.width, e.y * e.height, e.width, e.height);
@@ -90,6 +97,16 @@ public class TileMap extends Entity {
                 g2.setColor(gp.getBackground());
             }
         }
+    }
+
+    /*
+     * To remove all the inactive entities from the given arraylist
+     */
+    private static ArrayList<Entity> removeInactiveEntities(ArrayList<Entity> entityArrayList) {
+        // Make a new arraylist and add only active entities to it
+        ArrayList<Entity> activeEntities = new ArrayList<>();
+        for(Entity e: entityArrayList) { if(e.isActive) activeEntities.add(e); }
+        return activeEntities;
     }
     
 }
