@@ -17,6 +17,9 @@ public abstract class Entity {
     // protected attribute of color
     protected Color color = Color.WHITE;
 
+    // The health point of entities
+    protected int healthPoints = 100;
+
     public Entity(int posX, int posY, int entityWidth, int entityHeight) {
         x = posX;
         y = posY;
@@ -41,8 +44,24 @@ public abstract class Entity {
         return (b.x == e.x) && (b.y == e.y);
     }
 
+    // To check Entity is out of bounds
+    public static boolean isOutOfBounds(Entity b, int lowerBoundX, int upperBoundX, int lowerBoundY, int upperBoundY) {
+        // return true if the bullet is either out of bounds from the X or Y
+        boolean isInBoundX = (lowerBoundX <= b.x && b.x < upperBoundX);
+        boolean isInBoundY = (lowerBoundY <= b.y && b.y < upperBoundY);
+
+        return !(isInBoundX && isInBoundY);
+    }
+
     /*
      * Getters
      */
     public Color getColor() { return this.color; }
+    public int getHealthPoints() { return this.healthPoints; }
+
+    /*
+     * Setters
+     */
+    public void setHealthPoints(int hp) { this.healthPoints = (hp > 0) ? hp : this.healthPoints; }
+    
 }
