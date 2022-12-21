@@ -17,6 +17,12 @@ public class Constants {
     // The background color fo the window
     public static final Color BACKGROUND_COLOR = Color.BLACK;
     
+    /*
+     * Specifications related to GameObjets
+     */
+    // The valid directions for the bullet
+    public final static String[] VALID_DIRECTIONS = new String[] {"N", "E", "S", "W", "NW", "NE", "SE", "SW", "NEWS"};
+
 
     /*
      * The Tile-size and Tile-map specifications
