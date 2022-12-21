@@ -14,7 +14,7 @@ public class Bullet extends Entity {
     private final String[] validDirections = new String[] {"N", "E", "S", "W", "NW", "NE", "SE", "SW", "NESW"};
 
     // A color for the bullet
-    private Color color = Color.ORANGE;
+    private final Color defaultColor = Color.ORANGE;
 
     public Bullet(int posX, int posY, String direction) throws IllegalArgumentException {
         // Call the superclass constructor
@@ -25,6 +25,9 @@ public class Bullet extends Entity {
 
         // The HP will always be 1
         this.healthPoints = 1;
+
+        // The default color
+        this.color = defaultColor;
     }
     
     @Override
