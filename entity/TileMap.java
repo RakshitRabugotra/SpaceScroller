@@ -55,11 +55,17 @@ public class TileMap extends Entity {
          * Update the positions of the Player and enemies here!
          */
 
+        // Check collisions of entities with other entities
+        checkEntitiesCollision();
+
         // Remove all the inactive entities
         currentActiveEntities = removeInactiveEntities(currentActiveEntities);
 
         // Update all the enemies that are active
         for(Entity e: currentActiveEntities) e.update(dt);
+
+        // Display the number of entities in the scene
+        System.out.println("COUNT <ENTITIES>: " + currentActiveEntities.size());
 
         // Update the player
         player.update(dt);
@@ -107,6 +113,41 @@ public class TileMap extends Entity {
         ArrayList<Entity> activeEntities = new ArrayList<>();
         for(Entity e: entityArrayList) { if(e.isActive) activeEntities.add(e); }
         return activeEntities;
+    }
+
+    /*
+     * To check the collisions of one entity with other
+     */
+    private void checkEntitiesCollision() {
+        // Make out of bounds or colliding bullets inactive
+        for(int i = 0; i < currentActiveEntities.size(); i++) {
+
+            // Skip the iteration if the class of this object is not Bullet
+            Entity thisEntity = currentActiveEntities.get(i);
+
+            if(!thisEntity.getClass().getName().endsWith("Bullet")) continue;
+
+            // Check on all the items
+            for(int j = 0; j < currentActiveEntities.size(); j++) {
+                
+                // Don't check for the same item
+                if(j == i) continue;
+
+                // If the class of object is bullet, and the class of other object is not Player
+                // Then, we will make the bullet inactive
+                Entity otherEntity = currentActiveEntities.get(j);
+
+                // If the bullet collides this entity then, make it disappear
+                if(Entity.isColliding(thisEntity, otherEntity)) {
+                    currentActiveEntities.get(i).isActive = false;
+                }
+            }
+
+            // If the bullet is out of bounds then also make it inactive
+            if(Entity.isOutOfBounds(thisEntity, 0, Constants.MAX_SCREEN_COLS, 0, Constants.MAX_SCREEN_ROWS)) {
+                currentActiveEntities.get(i).isActive = false;
+            }
+        }
     }
     
 }
