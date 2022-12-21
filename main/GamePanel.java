@@ -36,7 +36,7 @@ public class GamePanel extends JPanel implements Runnable {
         tileMap.setPlayer(0, Constants.SCREEN_HEIGHT);
 
         // Add an enemy to the screen
-        tileMap.addEnemy(new Enemy(0, 0));
+        tileMap.addEnemy(new Enemy(Constants.MAX_SCREEN_COLS/2 - 1, Constants.MAX_SCREEN_ROWS/2 - 2));
     }
 
     // Function to initialize the game-thread and to call the run method
