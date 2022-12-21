@@ -35,6 +35,12 @@ public abstract class Entity {
 
     }
 
+    // To check a collision
+    protected static boolean isColliding(Entity b, Entity e) {
+        // A simple collision of positions is valid here!
+        return (b.x == e.x) && (b.y == e.y);
+    }
+
     /*
      * Getters
      */
