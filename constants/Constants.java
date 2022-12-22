@@ -33,8 +33,8 @@ public class Constants {
     public static final int SCALED_TILESIZE = GLOBAL_SCALE * ORIGINAL_TILESIZE;
 
     // The size of the screen is determined here
-    public static final int MAX_SCREEN_COLS = 20; // The width of the screen associated here
-    public static final int MAX_SCREEN_ROWS = 15; // The height of the screen associated here
+    public static final int MAX_SCREEN_COLS = 32; // The width of the screen associated here
+    public static final int MAX_SCREEN_ROWS = 24; // The height of the screen associated here
 
     // So the dimension of screen becomes
     public static final int SCREEN_WIDTH = MAX_SCREEN_COLS * SCALED_TILESIZE;
