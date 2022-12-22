@@ -1,7 +1,6 @@
 package SpaceScroller.entity;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 
 import SpaceScroller.constants.Constants;
 
@@ -13,9 +12,12 @@ public class Bullet extends Entity {
     // A color for the bullet
     private Color color = Color.ORANGE;
 
+    // The path to the image of Bullet class
+    private static final String imageFilePath = "SpaceScroller/art/bullet1.png";
+
     public Bullet(int posX, int posY, String direction) throws IllegalArgumentException {
         // Call the superclass constructor
-        super(posX, posY, Constants.SCALED_TILESIZE, Constants.SCALED_TILESIZE);
+        super(posX, posY, Constants.SCALED_TILESIZE, Constants.SCALED_TILESIZE, imageFilePath);
 
         // Else we will copy the direction
         this.direction = direction;
@@ -71,11 +73,6 @@ public class Bullet extends Entity {
                 System.out.println("Illegal value for direction: " + direction);
                 break;
         }
-    }
-
-    @Override
-    public void draw(Graphics2D g2) {
-        // Draw method will be handled by the TileMap
     }
 
     // To validate the direction of the Bullet

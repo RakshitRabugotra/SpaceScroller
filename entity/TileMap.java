@@ -26,7 +26,7 @@ public class TileMap extends Entity {
 
     public TileMap(GamePanel gp, KeyHandler keyH) {
         // Call the superclass constructor
-        super(0, 0, Constants.MAX_SCREEN_COLS, Constants.MAX_SCREEN_ROWS);
+        super(0, 0, Constants.MAX_SCREEN_COLS, Constants.MAX_SCREEN_ROWS, null);
 
         // Copy the keyHandler reference
         this.keyH = keyH;
@@ -87,16 +87,15 @@ public class TileMap extends Entity {
             for(int col = 0; col < this.width; col++) {
                 // If the position is same as player, then render a green rectangle
                 if(col == player.x && row == player.y) {
-                    g2.setColor(player.getColor());
-                    g2.drawRect(player.x * player.width, player.y * player.height, player.width, player.height);
+                    // Render the player
+                    player.draw(g2);
                     continue;
                 }
 
                 // If the position is same as any enemy, then render the enemy
                 for(Entity e : currentActiveEntities) {
                     if(col == e.x && row == e.y) {
-                        g2.setColor(e.getColor());
-                        g2.drawRect(e.x * e.width, e.y * e.height, e.width, e.height);
+                        e.draw(g2);
                     } 
                 }
 

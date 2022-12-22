@@ -2,6 +2,14 @@ package SpaceScroller.entity;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
 
 public abstract class Entity {
     
@@ -20,12 +28,22 @@ public abstract class Entity {
     // The health point of entities
     protected int healthPoints = 100;
 
-    public Entity(int posX, int posY, int entityWidth, int entityHeight) {
+    // The Buffered image used to represent this entity
+    protected BufferedImage entityImage;
+
+    public Entity(int posX, int posY, int entityWidth, int entityHeight, String imageFilePath) {
         x = posX;
         y = posY;
         width = entityWidth;
         height = entityHeight;
         isActive = true;
+
+        // Try to set the image of entity
+        try {
+            entityImage = imageFilePath == null ? null : createImage(imageFilePath);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
     }
 
     // Each entity has some update method
@@ -35,11 +53,19 @@ public abstract class Entity {
 
     // Each entity has some draw method
     public void draw(Graphics2D g2) {
+        // If the image is null, then render a rectangle with given color
+        if(entityImage == null) {
+            g2.setColor(this.getColor());
+            g2.drawRect(x * width, y * height, width, height);
+            return;
+        }
 
+        // Else, render the image
+        g2.drawImage(this.entityImage, x * width, y * height, width, height, null);
     }
 
     // To check a collision
-    protected static boolean isColliding(Entity b, Entity e) {
+    public static boolean isColliding(Entity b, Entity e) {
         // A simple collision of positions is valid here!
         return (b.x == e.x) && (b.y == e.y);
     }
@@ -64,4 +90,23 @@ public abstract class Entity {
      */
     public void setHealthPoints(int hp) { this.healthPoints = (hp > 0) ? hp : this.healthPoints; }
     
+
+    /*
+     * Helper functions
+     */
+    private static BufferedImage createImage(String filepath) throws IOException {
+        // Create a file from this path
+        File imageFile = new File(filepath);
+        // Convert this to input stream
+        try {
+            InputStream targetImageStream = new FileInputStream(imageFile);
+            // Return a buffered image object
+            return ImageIO.read(targetImageStream);
+
+        } catch(FileNotFoundException fnfe) {
+
+            System.out.println("Filepath '" + filepath + "' couldn't be found");
+            return null;
+        }
+    }
 }

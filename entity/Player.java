@@ -8,7 +8,6 @@ import SpaceScroller.constants.Constants;
 import SpaceScroller.main.KeyHandler;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 
 public class Player extends Entity {
 
@@ -23,7 +22,7 @@ public class Player extends Entity {
 
     public Player(KeyHandler keyH, int posX, int posY) {
         // Call the superclass constructor 
-        super(posX, posY, Constants.SCALED_TILESIZE, Constants.SCALED_TILESIZE);
+        super(posX, posY, Constants.SCALED_TILESIZE, Constants.SCALED_TILESIZE, null);
 
         // Copy the reference to the KeyHandler
         this.keyH = keyH;
@@ -51,15 +50,6 @@ public class Player extends Entity {
         // Clamp the position of the player
         this.x = Math.min(Math.max(this.x, 0), Constants.MAX_SCREEN_COLS - 1); // -1 for the width and height
         this.y = Math.min(Math.max(this.y, 0), Constants.MAX_SCREEN_ROWS - 1); // -1 for the width and height
-    }
-
-    @Override
-    public void draw(Graphics2D g2) {
-        /*
-         * We don't need a render function on this class
-         * As we will render the player in TileMap class automatically
-         */
-        return;
     }
 
     /*
