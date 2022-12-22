@@ -23,11 +23,13 @@ public class Bullet extends Entity {
         this.direction = direction;
 
         // The HP will always be 1
-        this.healthPoints = 1;
+        this.setHealthPoints(1);
     }
     
-    @Override
     public void update(double dt) {
+        // Call the superclass function
+        super.update(dt);
+
         // Add the speed to the position
         switch(this.direction) {
             case "N":
@@ -88,11 +90,4 @@ public class Bullet extends Entity {
      */
     @Override
     public Color getColor() { return this.color; }
-
-    /*
-     * Setters
-     */
-    @Override
-    public void setHealthPoints(int hp) { /* Cannot change the HP of bullet */ this.healthPoints = 1;}
-
 }

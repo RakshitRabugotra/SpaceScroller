@@ -65,9 +65,6 @@ public class TileMap extends Entity {
         // Update all the enemies that are active
         for(Entity e: currentActiveEntities) e.update(dt);
 
-        // Display the number of entities in the scene
-        System.out.println("COUNT <ENTITIES>: " + currentActiveEntities.size());
-
         // Update the player
         player.update(dt);
 
@@ -93,11 +90,7 @@ public class TileMap extends Entity {
                 }
 
                 // If the position is same as any enemy, then render the enemy
-                for(Entity e : currentActiveEntities) {
-                    if(col == e.x && row == e.y) {
-                        e.draw(g2);
-                    } 
-                }
+                for(Entity e : currentActiveEntities) {if(col == e.x && row == e.y) { e.draw(g2); }}
 
                 // Now we will print nothing (blank spaces)
                 g2.setColor(gp.getBackground());
@@ -127,9 +120,14 @@ public class TileMap extends Entity {
 
             if(!thisEntity.getClass().getName().endsWith("Bullet")) continue;
 
+            
+            int newHP = -1;
             // Check on all the items
             for(int j = 0; j < currentActiveEntities.size(); j++) {
                 
+                // The new HP of objects on getting hit
+                newHP = 0;
+
                 // Don't check for the same item
                 if(j == i) continue;
 
@@ -142,7 +140,15 @@ public class TileMap extends Entity {
 
                 // If the bullet collides this entity then, make it disappear
                 if(Entity.isColliding(thisEntity, otherEntity)) {
+                    // Make the bullet disappear
                     currentActiveEntities.get(i).isActive = false;
+                    // Hit the HP of other entity
+                    newHP = otherEntity.getHealthPoints() - thisEntity.getHitPoints();
+
+                    System.out.println("HIT POINTS: " + thisEntity.getHitPoints());
+                    System.out.println("HEALTH POINTS ENEMY: " + otherEntity.getHealthPoints());
+                    System.out.println("NEW HP: " + newHP);
+                    currentActiveEntities.get(j).setHealthPoints(newHP);
                 }
             }
 

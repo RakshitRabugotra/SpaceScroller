@@ -28,11 +28,12 @@ public class Player extends Entity {
         this.keyH = keyH;
     }
 
-    @Override
     public void update(double dt) {
         /*
          * We will handle key-inputs here!
          */
+        // Call the superclass update method
+        super.update(dt);
 
         // Move the player around the screen
         if(keyH.upPressed) this.y--;

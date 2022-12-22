@@ -26,7 +26,10 @@ public abstract class Entity {
     protected Color color = Color.WHITE;
 
     // The health point of entities
-    protected int healthPoints = 100;
+    private int healthPoints = 100;
+
+    // The attack points of the Bullet
+    private int hitPoints = 1;
 
     // The Buffered image used to represent this entity
     protected BufferedImage entityImage;
@@ -48,7 +51,8 @@ public abstract class Entity {
 
     // Each entity has some update method
     public void update(double dt) {
-
+        // If the entity has run out of HealthPoints, then make it inactive
+        if(healthPoints <= 0) isActive = false;
     }
 
     // Each entity has some draw method
@@ -84,13 +88,13 @@ public abstract class Entity {
      */
     public Color getColor() { return this.color; }
     public int getHealthPoints() { return this.healthPoints; }
+    public int getHitPoints() { return this.hitPoints; }
 
     /*
      * Setters
      */
-    public void setHealthPoints(int hp) { this.healthPoints = (hp > 0) ? hp : this.healthPoints; }
-    
-
+    public void setHealthPoints(int healthP) { this.healthPoints = (healthP >= 0) ? healthP : this.healthPoints; }
+    public void setHitPoints(int hitP) { this.hitPoints = (hitP > 0) ? hitP : this.hitPoints; }
     /*
      * Helper functions
      */
