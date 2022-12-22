@@ -4,7 +4,7 @@ package SpaceScroller.constants;
  * Defining the possible clusters of bullet
  */
 
-public class BulletClusters {
+public class BulletClusterProps {
     
     public static final int[][][] CLUSTERS = new int[][][] {
         {
