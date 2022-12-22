@@ -3,6 +3,7 @@
  */
 package SpaceScroller.entity;
 
+import SpaceScroller.constants.BulletClusterProps;
 import SpaceScroller.constants.Constants;
 import SpaceScroller.main.KeyHandler;
 
@@ -44,7 +45,7 @@ public class Player extends Entity {
         // To change the bullet type
         if(keyH.switchBulletPressed) {
             this.bulletSpawnType++;
-            if(this.bulletSpawnType == Constants.VALID_DIRECTIONS.length) this.bulletSpawnType = 0;
+            if(this.bulletSpawnType == BulletClusterProps.CLUSTERS.length) this.bulletSpawnType = 0;
         }
 
         // Clamp the position of the player
