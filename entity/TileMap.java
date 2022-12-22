@@ -3,6 +3,7 @@ package SpaceScroller.entity;
 import SpaceScroller.constants.Constants;
 import SpaceScroller.main.GamePanel;
 import SpaceScroller.main.KeyHandler;
+import SpaceScroller.resource.ClusterBullet;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;;
@@ -66,15 +67,14 @@ public class TileMap extends Entity {
 
         // Display the number of entities in the scene
         System.out.println("COUNT <ENTITIES>: " + currentActiveEntities.size());
-        System.out.println("BULLET INDEX/DIRECTION: " + player.getBulletSpawnType() + " / " + Constants.VALID_DIRECTIONS[player.getBulletSpawnType()]);
 
         // Update the player
         player.update(dt);
 
         // If the user wants to shoot, then shoot a bullet
         if(keyH.shootPressed) {
-            // Instantiate a new bullet and give it upwards direction
-            currentActiveEntities.add(new Bullet(player.x, player.y, Constants.VALID_DIRECTIONS[player.getBulletSpawnType()]));
+            // Instantiate a new Bullet Cluster and add it's bullets to the entities list
+            for(Bullet b: ClusterBullet.createCluster(player.x, player.y, player.getBulletSpawnType())) { currentActiveEntities.add(b); }
         }
     }
 
@@ -137,6 +137,9 @@ public class TileMap extends Entity {
                 // If the class of object is bullet, and the class of other object is not Player
                 // Then, we will make the bullet inactive
                 Entity otherEntity = currentActiveEntities.get(j);
+                
+                // Don't check for bullet-bullet collision
+                if(otherEntity.getClass().getName().endsWith("Bullet")) continue;
 
                 // If the bullet collides this entity then, make it disappear
                 if(Entity.isColliding(thisEntity, otherEntity)) {
