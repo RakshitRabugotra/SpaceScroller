@@ -4,6 +4,7 @@ import SpaceScroller.constants.Constants;
 import SpaceScroller.main.GamePanel;
 import SpaceScroller.main.KeyHandler;
 import SpaceScroller.resource.ClusterBullet;
+import SpaceScroller.resource.EnemySpawner;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;;
@@ -72,6 +73,12 @@ public class TileMap extends Entity {
         if(keyH.shootPressed) {
             // Instantiate a new Bullet Cluster and add it's bullets to the entities list
             for(Bullet b: ClusterBullet.createCluster(player.x, player.y, player.getBulletSpawnType())) { currentActiveEntities.add(b); }
+        }
+
+        // If the active entity is only the player.. then spawn a batch of enemies
+        if(currentActiveEntities.size() == 0) {
+            for(int i = 0; i < 10; i++)
+                addEnemy(EnemySpawner.spawnRandomEnemies(0, Constants.MAX_SCREEN_COLS/2, 0, Constants.MAX_SCREEN_ROWS/2, 1));
         }
     }
 
